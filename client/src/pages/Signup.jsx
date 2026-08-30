@@ -155,12 +155,7 @@ return (
           </p>
         </div>
 
-        {backendemail && (
-          <div className="mb-5 rounded-xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-center text-sm text-red-300">
-            {backendemail}
-          </div>
-        )}
-
+        
         <form onSubmit={Submit} className="flex flex-col gap-5">
           {type === "Sign up" && (
             <div className="flex flex-col gap-2">
