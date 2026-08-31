@@ -9,12 +9,20 @@ const clientslice=createSlice({
         },
         backendemail:"",
         type:"Sign up",
-        navclass:""
+        navclass:"",
+        imgprompt:"",
+        serverimg:""
 },
 reducers:{
     setLogindata(state,action){
         const {name,value}=action.payload;
         state.Logindata[name]=value;
+    },
+    setimgprompt(state,action){
+        state.imgprompt=action.payload;
+    },
+    setserverimg(state,action){
+        state.serverimg=action.payload;
     },
     setnavclass(state,action){
         state.navclass=action.payload;

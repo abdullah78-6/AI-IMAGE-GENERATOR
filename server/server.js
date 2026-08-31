@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser"
 import "dotenv/config"
 import Connectdb from "./utils/db.js";
 import Authrouter from "./routes/auth-route.js";
+import Imagerouter from "./routes/image-route.js";
 const app=express();
  
 app.use(cors({
@@ -18,6 +19,7 @@ app.get("/",(req,res)=>{
     res.json({status:true,message:"THE SERVER IS READY FOR WORKING "})
 })
 app.use("/api/auth/",Authrouter);
+app.use("/api/img/",Imagerouter);
 const port=process.env.PORT;
 app.listen(port,()=>{
    
