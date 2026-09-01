@@ -11,12 +11,16 @@ const clientslice=createSlice({
         type:"Sign up",
         navclass:"",
         imgprompt:"",
-        serverimg:""
+        serverimg:"",
+        download2:""
 },
 reducers:{
     setLogindata(state,action){
         const {name,value}=action.payload;
         state.Logindata[name]=value;
+    },
+    setdownload2(state,action){
+      state.download2=action.payload;  
     },
     setimgprompt(state,action){
         state.imgprompt=action.payload;

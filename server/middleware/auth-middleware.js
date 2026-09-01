@@ -9,7 +9,10 @@ const Authmiddleware=async(req,res,next)=>{
         if(!req.body){
             req.body={}
         }
-        req.body.userid=tokendecode.id;
+        // req.body.userid=tokendecode.id;
+        req.user={
+            id:tokendecode.id
+        }
         next();
     } catch (error) {
      console.log("AUTH MIDDLEWARE ERROR ",error);
