@@ -7,7 +7,7 @@ import { control } from '../redux/slice';
 import Hero from './Hero';
 const Home = ({url})=> {
 const dispatch=useDispatch();
-const profile=useSelector(state=>state.main.ackendemail);
+const profile=useSelector(state=>state.main.backendemail);
 const Fetch=async()=>{
       try {
         const res=await axios.get(url+"/api/auth/getprofile",{
@@ -34,6 +34,7 @@ const Fetch=async()=>{
     <div>
       <Navbar url={url}/>
       <Hero url={url}/>
+      
         <Footer/>
       
     </div>

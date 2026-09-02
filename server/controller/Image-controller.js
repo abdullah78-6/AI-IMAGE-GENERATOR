@@ -1,6 +1,5 @@
 import { InferenceClient } from "@huggingface/inference";
 import Usermodel from "../models/auth-model.js";
-import cloudinary from "../utils/cloudinary.js";
 import imagekit from "../utils/imagekit.js";
 const hf=new InferenceClient(process.env.HF_TOKEN);
 const Imagecontroller=async(req,res)=>{
@@ -28,6 +27,8 @@ const Imagecontroller=async(req,res)=>{
         
         
         
+        
+        
     } catch (error) {
         console.log("SERVER ERROR WHILE GENRATING",error.name,error.message,error.http_code,error.status);
         return res.json({status:false,message:"SERVER ERROR "})
@@ -37,16 +38,23 @@ const Imagecontroller=async(req,res)=>{
 
 }
 const Saveimageindb=async(req,res)=>{
-    const {newimage}=req.body;
+    const {newimage,prompt}=req.body;
     try {
-        if(!newimage){
-            return res.json({status:false,message:"Image URL is required"});
+        if(!newimage||!prompt){
+            return res.json({status:false,message:"Image URL and prompt is required"});
         }
         const user=await Usermodel.findById(req.user.id);
         if(!user){
             return res.json({status:false,message:"User not found"});
         }
-        user.history.push(newimage);
+       const date=new Date();
+        const data={
+            image_address:newimage,
+            text_prompt:prompt,
+            date:`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
+            
+        }
+        user.history.push(data);
         await user.save();
         return res.json({status:true,message:"Image saved successfully"});
         
@@ -58,4 +66,23 @@ const Saveimageindb=async(req,res)=>{
     
 
 }
-export{Imagecontroller,Saveimageindb}
+const Gethistory=async(req,res)=>{
+    try {
+        const user=await Usermodel.findById(req.user.id);
+        if(!req.user||!req.user.id){
+            return res.json({status:false,message:"User is not authenticated"});
+        }
+        if(!user){
+            return res.json({status:false,message:"User not found"});
+        }
+        const history_result=user.history;
+        console.log(history_result);
+        return res.json({status:true,history:history_result})
+    } catch (error) {
+        console.log("Get history error",error);
+        return res.json({status:false,message:"Get history error"});
+        
+    }
+
+}
+export{Imagecontroller,Saveimageindb,Gethistory}
