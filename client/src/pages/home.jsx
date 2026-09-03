@@ -5,6 +5,7 @@ import {useDispatch,useSelector} from "react-redux"
 import Navbar from '../components/Navbar';
 import { control } from '../redux/slice';
 import Hero from './Hero';
+import Pricing from './pricing';
 const Home = ({url})=> {
 const dispatch=useDispatch();
 const profile=useSelector(state=>state.main.backendemail);
@@ -34,6 +35,7 @@ const Fetch=async()=>{
     <div>
       <Navbar url={url}/>
       <Hero url={url}/>
+      <Pricing/>
       
         <Footer/>
       

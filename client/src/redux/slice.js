@@ -14,12 +14,17 @@ const clientslice=createSlice({
         serverimg:"",
         download2:"",
         loading:false,
-        history:[]
+        history:[],
+        fileid:"",
+        deleteloading:false
 },
 reducers:{
     setLogindata(state,action){
         const {name,value}=action.payload;
         state.Logindata[name]=value;
+    },
+    setdeleteloading(state,action){
+        state.deleteloading=action.payload;
     },
     sethistory(state,action){
         state.history=action.payload;
@@ -41,6 +46,9 @@ reducers:{
     },
     setbackendemail(state,action){
         state.backendemail=action.payload;
+    },
+    setfileid(state,action){
+        state.fileid=action.payload;
     },
     settype(state,action){
         state.type=action.payload;

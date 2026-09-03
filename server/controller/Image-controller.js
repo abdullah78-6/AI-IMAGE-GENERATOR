@@ -22,8 +22,9 @@ const Imagecontroller=async(req,res)=>{
             tags:["ai-genrated"]
         })
         console.log(result.url);
+        
         // return res.json({status:true,message:"Image generated successfully",image:`data:${image.type||"image/png"};base64,${base64image}`})        FOR NOT UPLOADING IN A CLOUD PLATFORM 
-        return res.json({status:true,message:"Image generated successfully",image:result.url,download:`data:${image.type||"image/png"};base64,${base64image}`})        
+        return res.json({status:true,message:"Image generated successfully",image:result.url,download:`data:${image.type||"image/png"};base64,${base64image}`,fileid:result.fileId})        
         
         
         
@@ -38,19 +39,23 @@ const Imagecontroller=async(req,res)=>{
 
 }
 const Saveimageindb=async(req,res)=>{
-    const {newimage,prompt}=req.body;
+    const {newimage,prompt,fileid}=req.body;
+    
     try {
-        if(!newimage||!prompt){
-            return res.json({status:false,message:"Image URL and prompt is required"});
+
+        if(!newimage||!prompt||!fileid){
+            return res.json({status:false,message:"Image URL,file ID and prompt is required"});
         }
         const user=await Usermodel.findById(req.user.id);
         if(!user){
             return res.json({status:false,message:"User not found"});
         }
+       
        const date=new Date();
         const data={
             image_address:newimage,
             text_prompt:prompt,
+            fileid:fileid,
             date:`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
             
         }
@@ -76,7 +81,6 @@ const Gethistory=async(req,res)=>{
             return res.json({status:false,message:"User not found"});
         }
         const history_result=user.history;
-        console.log(history_result);
         return res.json({status:true,history:history_result})
     } catch (error) {
         console.log("Get history error",error);
@@ -85,4 +89,35 @@ const Gethistory=async(req,res)=>{
     }
 
 }
-export{Imagecontroller,Saveimageindb,Gethistory}
+const Deletehistory=async(req,res)=>{
+    try {
+        const {_id}=req.body;
+        if(!req.user||!req.user.id){
+            return res.json({status:false,message:"User not Authenticated"});
+        }
+        if(!_id){
+            return res.json({status:false,message:"History ID is required "});
+        }
+        const user=await Usermodel.findById(req.user.id);
+        const history=user.history.id(_id);
+        if(!history){
+            return res.json({status:false,message:"History item not found"})
+        }
+        const fileid=history.fileid;
+        if(fileid){
+            await imagekit.files.delete(fileid);
+        }
+        user.history.pull(_id);
+        await user.save();
+        return res.json({status:true,message:"History Deleted"});
+    
+        
+        
+    } catch (error) {
+        console.log("delete history error ",error);
+      return  res.json({status:false,message:"Delete history server error "})
+        
+    }
+
+}
+export{Imagecontroller,Saveimageindb,Gethistory,Deletehistory}

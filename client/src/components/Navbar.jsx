@@ -38,6 +38,10 @@ const Fetch=async()=>{
         });
         if(response.data.status){
             dispatch(control.setbackendemail(""));
+            dispatch(control.setserverimg(""));
+            dispatch(control.setdownload2(""))
+            dispatch(control.setfileid(""));
+            dispatch(control.setimgprompt(""));
             
         toast.success(response.data.message);
 
@@ -56,7 +60,7 @@ return (
         <ul className='flex justify-between items-center gap-15 text-xl text-white'>
             <li onClick={()=>dispatch(control.setnavclass("Home"))} className={`cursor-pointer ${navclass==="Home"?" inset-0 transition ease-in-out duration-300 p-2  rounded-full bg-gradient-to-r from-[#AD62AA]/40 to-[#D91656]/40 border border-[#EF88AD]/40":""}`}>Home</li>
             <li onClick={()=>dispatch(control.setnavclass("generate"))} className={`cursor-pointer ${navclass==="generate"?" inset-0 transition ease-in-out duration-300 p-2 rounded-full bg-gradient-to-r from-[#AD62AA]/40 to-[#D91656]/40 border border-[#EF88AD]/40":""}`} >Generate</li>
-            <li onClick={()=>dispatch(control.setnavclass("explore"))} className={`cursor-pointer ${navclass==="explore"?" inset-0 transition ease-in-out duration-300 p-2 rounded-full bg-gradient-to-r from-[#AD62AA]/40 to-[#D91656]/40 border border-[#EF88AD]/40":""}`}>Explore</li>
+            <li onClick={()=>dispatch(control.setnavclass("History"))} className={`cursor-pointer ${navclass==="History"?" inset-0 transition ease-in-out duration-300 p-2 rounded-full bg-gradient-to-r from-[#AD62AA]/40 to-[#D91656]/40 border border-[#EF88AD]/40":""}`}>History</li>
             <li onClick={()=>dispatch(control.setnavclass("pricing"))} className={`cursor-pointer ${navclass==="pricing"?" inset-0 transition ease-in-out duration-300 p-2 rounded-full bg-gradient-to-r from-[#AD62AA]/40 to-[#D91656]/40 border border-[#EF88AD]/40":""}`}>Pricing</li>
               <div className='flex justify-center items-center gap-6'>
             <div>

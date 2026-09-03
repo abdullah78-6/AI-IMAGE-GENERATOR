@@ -14,6 +14,7 @@ const Hero = ({url}) => {
   const backendemail=useSelector(state=>state.main.backendemail);
   const download2=useSelector(state=>state.main.download2);
   const loading=useSelector(state=>state.main.loading);
+  const fileid=useSelector(state=>state.main.fileid);
   const Genrateaiimage=async(e)=>{
   e.preventDefault();
   dispatch(control.setloading(true));
@@ -29,6 +30,7 @@ if(res.data.status){
   dispatch(control.setserverimg(res.data.image))
   dispatch(control.setdownload2(res.data.download))
   dispatch(control.setloading(false));
+  dispatch(control.setfileid(res.data.fileid));
   
 }
 else{
@@ -69,7 +71,7 @@ const SaveinDb=async()=>{
   }
   
   try {
-    const res=await axios.post(url+"/api/img/save_image",{newimage:serverimg,prompt:imgprompt},{
+    const res=await axios.post(url+"/api/img/save_image",{newimage:serverimg,prompt:imgprompt,fileid:fileid},{
       withCredentials:true
     })
     if(res.data.status){

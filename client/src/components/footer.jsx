@@ -3,10 +3,10 @@ const Footer = () => {
     <footer className="border-t border-gray-800 bg-gray-950 text-gray-400">
       <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
 
-        {/* Main Footer */}
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        
+        <div className="flex justify-between items-center gap-10 flex-wrap">
 
-          {/* Brand */}
+          
           <div className="sm:col-span-2 lg:col-span-1">
             <h2 className="text-2xl font-bold text-white">
               AI<span className="text-purple-500">Vision</span>
@@ -18,7 +18,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Product */}
+          
           <div>
             <h3 className="text-sm font-semibold text-white">
               Product
@@ -78,8 +78,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
+        
+          {/* <div>
             <h3 className="text-sm font-semibold text-white">
               Follow Us
             </h3>
@@ -109,10 +109,10 @@ const Footer = () => {
                 IG
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
 
-        {/* Bottom */}
+        
         <div className="mt-10 flex flex-col gap-4 border-t border-gray-800 pt-6 text-center text-sm sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>
             © {new Date().getFullYear()} AI Vision. All rights reserved.

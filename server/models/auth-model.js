@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 const Historyschema=new mongoose.Schema({
     image_address:{type:String,required:true},
     text_prompt:{type:String,required:true},
+    fileid:{type:String,required:true},
     date:{type:String,required:true}
 });
 const Authschema=new mongoose.Schema({
