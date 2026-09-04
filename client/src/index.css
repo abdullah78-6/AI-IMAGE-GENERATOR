@@ -4,3 +4,6 @@ body{
     background-image: linear-gradient(to  right,#caced4,#b480e0);
 
 }
+html{
+    scroll-behavior: smooth;
+}

@@ -12,6 +12,7 @@ const Explore_Gallery = ({url}) => {
     const backendemail=useSelector(state=>state.main.backendemail);
     const history=useSelector(state=>state.main.history);
     const deleteloading=useSelector(state=>state.main.deleteloading);
+    const mobilemenu=useSelector(state=>state.main.mobilemenu);
     const Fetch_history=async()=>{
       try {
         const res=await axios.get(url+"/api/img/get_history",{
@@ -57,10 +58,10 @@ const Explore_Gallery = ({url}) => {
         }
       }
     return (
-    <div className="min-h-screen w-full font-semibold">
+    <div className="min-h-screen w-full font-semibold  ">
       <Navbar url={url} />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 pt-12 pb-4">
+      
+      <div className={`max-w-6xl mx-auto px-4 ${mobilemenu?"mt-90":"mt-0"} sm:px-8 pt-12 pb-4`}>
         <p className="text-pink-700  text-2xl tracking-wide">Your creations</p>
         <h1 className=" text-4xl sm:text-5xl text-purple-700 mt-1">
           Generation history
@@ -108,7 +109,7 @@ const Explore_Gallery = ({url}) => {
                     <button
                       onClick={() => Delete(item._id)}
                       aria-label="Delete image"
-                      className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur text-[#F5EFF2] flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-[#B23A63] transition-all duration-200"
+                      className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur text-[#F5EFF2] flex items-center justify-center opacity-100 group-hover:opacity-100 hover:bg-[#B23A63] transition-all duration-200"
                     >
                       
                       <FaTrash size={13} />

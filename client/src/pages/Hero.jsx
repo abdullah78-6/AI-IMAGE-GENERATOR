@@ -15,6 +15,7 @@ const Hero = ({url}) => {
   const download2=useSelector(state=>state.main.download2);
   const loading=useSelector(state=>state.main.loading);
   const fileid=useSelector(state=>state.main.fileid);
+  const mobilemenu=useSelector(state=>state.main.mobilemenu);
   const Genrateaiimage=async(e)=>{
   e.preventDefault();
   dispatch(control.setloading(true));
@@ -88,7 +89,7 @@ const SaveinDb=async()=>{
 
 }
   return (
-    <div className='font-semibold capitalize mt-5 p-7 '>
+    <div className={`font-semibold capitalize ${mobilemenu?"mt-90":"mt-6"} p-7 `}>
 
       <div className='flex justify-center items-center flex-col gap-7 text-center'>
         <div>
@@ -102,26 +103,26 @@ const SaveinDb=async()=>{
 
         </div>
         <div>
-            <p className='w-190 text-xl text-slate-600 '>create unique, high-quality images in seconds with the power of AI. Just describe your idea, and let our AI bring it to life.</p>
+            <p className='w-70 md:w-190 xl:w-190 lg:w-190 text-xl text-slate-600 '>create unique, high-quality images in seconds with the power of AI. Just describe your idea, and let our AI bring it to life.</p>
         </div>
         <div className='mb-3'>
             <form onSubmit={Genrateaiimage}>
                 <div>
                   
-                <input onChange={(e)=>dispatch(control.setimgprompt(e.target.value))}  className="px-3 py-2.5 text-sm text-slate-800 w-full rounded-lg bg-neutral-300 border border-neutral-700 outline-none placeholder:text-slate-800 focus:border-[#D91656] focus:ring-2 focus:ring-[#D91656]/30 transition-colors" type="text"placeholder='Enter-Image-Prompt' required/>
+                <input onChange={(e)=>dispatch(control.setimgprompt(e.target.value))}  className="px-3 py-2.5 text-sm text-slate-800 w-full rounded-lg bg-neutral-300 border-3 border-neutral-700 outline-none placeholder:text-slate-800 focus:border-[#D91656] focus:ring-2 focus:ring-[#D91656]/30 transition-colors" type="text"placeholder='Enter-Image-Prompt' required/>
                 </div>
                 <div className='flex justify-between items-center gap-15 mt-3'>
                     <div>
                         <button className='bg-green-400 p-2 rounded-lg hover:bg-green-600 transition ease-in-out duration-200 ' title='Generate Image' type='submit'>Generate Image</button>
                     </div>
                     <div>
-                        <Link to="/history" target='blank'    className='bg-teal-500 p-2 rounded-lg hover:bg-teal-600 transition ease-in-out duration-200 ' title='Explore Gallery' type="button">Explore Gallery</Link>
+                        <Link to="/history" target='blank'    className='bg-teal-500 p-2 rounded-lg hover:bg-teal-600 transition ease-in-out duration-200 text-sm md:text-xl lg:text-xl xl:text-xl' title='Explore Gallery' type="button">History</Link>
                     </div>
                 </div>
 
             </form>
             
-            {download2&&<div className='flex justify-start p-2 '>
+            {download2&&<div className='flex justify-center p-2  '>
             <div>
                 <button className='text-cyan-800 flex justify-center items-center gap-5  bg-gray-400 p-3 text-xl rounded-lg hover:bg-gray-600 hover:text-purple-300 transition ease-in-out duration-200' onClick={DownloadIMage}><span><IoIosCloudDownload className='text-2xl'/></span>Download</button>
               </div>
@@ -132,14 +133,14 @@ const SaveinDb=async()=>{
                                   
                    />
               </div>}
-            {serverimg&&<div>
+            {serverimg&&<div className='flex justify-center items-center gap-5 flex-wrap mt-3 flex-col'>
               
               <div>
-              <img className='w-90 h-90' src={serverimg} alt="AI-GENRATED-IMAGE"/>
+              <img className='w-90 h-90 border-2 border-emerald-900 rounded-lg hover:scale-110 transition ease-in-out duration-200 hover:border-purple-700' src={serverimg} alt="AI-GENRATED-IMAGE"/>
               </div>
               <div className='flex justify-center items-center gap-6 mt-5 text-3xl'>
               <div>
-                <button onClick={SaveinDb} className='text-emerald-800 bg-gray-400 p-4 rounded-lg hover:bg-gray-600 transition ease-in-out duration-200 hover:text-purple-300'><FaSave/></button>
+                <button onClick={SaveinDb} className='text-emerald-800 bg-gray-400 py-3 rounded-lg hover:bg-gray-600 transition ease-in-out duration-200 hover:text-purple-300 flex justify-center items-center gap-3 px-9'><FaSave/> <span>Save</span></button>
               </div>
               
               </div>

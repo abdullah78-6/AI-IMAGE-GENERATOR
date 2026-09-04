@@ -16,12 +16,16 @@ const clientslice=createSlice({
         loading:false,
         history:[],
         fileid:"",
-        deleteloading:false
+        deleteloading:false,
+        mobilemenu:false
 },
 reducers:{
     setLogindata(state,action){
         const {name,value}=action.payload;
         state.Logindata[name]=value;
+    },
+    setmobilemenu(state,action){
+        state.mobilemenu=action.payload;
     },
     setdeleteloading(state,action){
         state.deleteloading=action.payload;
