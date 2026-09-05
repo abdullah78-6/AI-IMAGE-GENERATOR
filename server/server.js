@@ -8,7 +8,7 @@ import Imagerouter from "./routes/image-route.js";
 const app=express();
  
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://ai-vision-t0ei.onrender.com",
     credentials:true
 }))
 
