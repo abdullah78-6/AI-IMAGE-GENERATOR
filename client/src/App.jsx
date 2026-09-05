@@ -7,7 +7,7 @@ import { useEffect } from "react"
 import { control } from "./redux/slice"
 import Explore_Gallery from "./pages/Explore_Gallery"
 function App() {
-const backendurl="http://localhost:9000"
+const backendurl="https://ai-image-generator-backend-4h48.onrender.com"
     const Fetch=async()=>{
       try {
         const res=await axios.get(backendurl+"/api/auth/getprofile",{
